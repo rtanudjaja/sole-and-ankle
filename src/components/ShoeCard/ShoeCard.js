@@ -37,20 +37,24 @@ const ShoeCard = ({
         <ImageWrapper>
           <Image alt="" src={imageSrc} />
         </ImageWrapper>
+        {variant === 'on-sale' && (<SaleFlag>Sale</SaleFlag>)}
+        {variant === 'new-release' && (<NewFlag>Just released!</NewFlag>)}
         <Spacer size={12} />
         <Row>
           <Name>{name}</Name>
-          <Price>{formatPrice(price)}</Price>
+          <Price
+            style={{
+              '--color': variant === 'on-sale' ? COLORS.gray[700] : undefined,
+              '--text-decoration': variant === 'on-sale' ? 'line-through' : undefined,
+            }}
+          >
+            {formatPrice(price)}
+          </Price>
         </Row>
         <Row>
           <ColorInfo>{pluralize('Color', numOfColors)}</ColorInfo>
           {salePrice && <SalePrice>{formatPrice(salePrice)}</SalePrice>}
         </Row>
-        {variant !== 'default' && (
-          <LabelVariant variant={variant}>
-            {variant === "new-release" ? "Just released!" :  "Sale"}
-          </LabelVariant>
-        )}
       </Wrapper>
     </Link>
   );
@@ -59,7 +63,6 @@ const ShoeCard = ({
 const Link = styled.a`
   text-decoration: none;
   color: inherit;
-  flex: 1 0 312px;
 `;
 
 const Wrapper = styled.article`
@@ -85,7 +88,10 @@ const Name = styled.h3`
   color: ${COLORS.gray[900]};
 `;
 
-const Price = styled.span``;
+const Price = styled.span`
+  color: var(--color);
+  text-decoration: var(--text-decoration);
+`;
 
 const ColorInfo = styled.p`
   color: ${COLORS.gray[700]};
@@ -96,15 +102,23 @@ const SalePrice = styled.span`
   color: ${COLORS.primary};
 `;
 
-const LabelVariant = styled.div`
+const Flag = styled.div`
   position: absolute;
-  top: 0;
-  right: 0;
-  padding: 7px 9px;
-  background-color: ${p => p.variant === "new-release" ? COLORS.secondary :  COLORS.primary};
-  font-size: 15px;
-  font-weight: 700;
+  top: 12px;
+  right: -4px;
+  padding: 6px 12px;
+  font-size: ${14 / 18}rem;
+  font-weight: ${WEIGHTS.bold};
+  line-height: 32px;
   color: ${COLORS.white};
 `;
+
+const SaleFlag = styled(Flag)`
+  background-color: ${COLORS.primary};
+`
+
+const NewFlag = styled(Flag)`
+  background-color: ${COLORS.secondary};
+`
 
 export default ShoeCard;
