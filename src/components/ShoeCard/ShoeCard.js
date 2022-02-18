@@ -44,7 +44,13 @@ const ShoeCard = ({
         </Row>
         <Row>
           <ColorInfo>{pluralize('Color', numOfColors)}</ColorInfo>
+          {salePrice && <SalePrice>{formatPrice(salePrice)}</SalePrice>}
         </Row>
+        {variant !== 'default' && (
+          <LabelVariant variant={variant}>
+            {variant === "new-release" ? "Just released!" :  "Sale"}
+          </LabelVariant>
+        )}
       </Wrapper>
     </Link>
   );
@@ -56,7 +62,9 @@ const Link = styled.a`
   flex: 1 0 312px;
 `;
 
-const Wrapper = styled.article``;
+const Wrapper = styled.article`
+  position: relative;
+`;
 
 const ImageWrapper = styled.div`
   position: relative;
@@ -86,6 +94,17 @@ const ColorInfo = styled.p`
 const SalePrice = styled.span`
   font-weight: ${WEIGHTS.medium};
   color: ${COLORS.primary};
+`;
+
+const LabelVariant = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 7px 9px;
+  background-color: ${p => p.variant === "new-release" ? COLORS.secondary :  COLORS.primary};
+  font-size: 15px;
+  font-weight: 700;
+  color: ${COLORS.white};
 `;
 
 export default ShoeCard;
