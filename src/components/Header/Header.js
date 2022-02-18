@@ -1,3 +1,58 @@
+// import React from 'react';
+// import styled from 'styled-components/macro';
+
+// import { COLORS, WEIGHTS } from '../../constants';
+// import Logo from '../Logo';
+// import SuperHeader from '../SuperHeader';
+
+// const Header = () => {
+//   // Our site features two visual headers, but they should be
+//   // grouped semantically as a single header.
+//   return (
+//     <header>
+//       <SuperHeader />
+//       <MainHeader>
+//         <Logo />
+//         <Nav>
+//           <NavLink href="/sale">Sale</NavLink>
+//           <NavLink href="/new">New&nbsp;Releases</NavLink>
+//           <NavLink href="/men">Men</NavLink>
+//           <NavLink href="/women">Women</NavLink>
+//           <NavLink href="/kids">Kids</NavLink>
+//           <NavLink href="/collections">Collections</NavLink>
+//         </Nav>
+//       </MainHeader>
+//     </header>
+//   );
+// };
+
+// const MainHeader = styled.div`
+//   padding: 0 32px;
+//   border-bottom: 1px solid ${COLORS.gray[300]};
+//   position: relative;
+//   padding: 22px 32px 20px;
+// `;
+
+// const Nav = styled.nav`
+//   display: flex;
+//   justify-content: center;
+//   gap: 48px;
+// `;
+
+// const NavLink = styled.a`
+//   font-size: 1.125rem;
+//   text-transform: uppercase;
+//   text-decoration: none;
+//   color: ${COLORS.gray[900]};
+//   font-weight: ${WEIGHTS.medium};
+
+//   &:first-of-type {
+//     color: ${COLORS.secondary};
+//   }
+// `;
+
+// export default Header;
+
 import React from 'react';
 import styled from 'styled-components/macro';
 
@@ -12,7 +67,9 @@ const Header = () => {
     <header>
       <SuperHeader />
       <MainHeader>
-        <Logo />
+        <Side>
+          <Logo />
+        </Side>
         <Nav>
           <NavLink href="/sale">Sale</NavLink>
           <NavLink href="/new">New&nbsp;Releases</NavLink>
@@ -21,22 +78,28 @@ const Header = () => {
           <NavLink href="/kids">Kids</NavLink>
           <NavLink href="/collections">Collections</NavLink>
         </Nav>
+        <Side />
       </MainHeader>
     </header>
   );
 };
 
 const MainHeader = styled.div`
-  padding: 0 32px;
+  display: flex;
+  align-items: baseline;
+  padding: 18px 32px;
+  height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
-  position: relative;
-  padding: 22px 32px 20px;
 `;
 
 const Nav = styled.nav`
   display: flex;
-  justify-content: center;
   gap: 48px;
+  margin: 0px 48px;
+`;
+
+const Side = styled.div`
+  flex: 1;
 `;
 
 const NavLink = styled.a`
@@ -45,7 +108,6 @@ const NavLink = styled.a`
   text-decoration: none;
   color: ${COLORS.gray[900]};
   font-weight: ${WEIGHTS.medium};
-
   &:first-of-type {
     color: ${COLORS.secondary};
   }
